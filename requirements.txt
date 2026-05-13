@@ -1,0 +1,9 @@
+selenium
+webdriver-manager
+beautifulsoup4
+pandas
+streamlit>=1.22.0
+gspread
+google-auth-oauthlib
+google-auth-httplib2
+google-auth

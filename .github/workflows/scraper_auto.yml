@@ -1,0 +1,28 @@
+name: Hourly Odds Scraper
+
+on:
+  schedule:
+    - cron: "0 * * * *" # Se lance toutes les heures (à la minute 0)
+  workflow_dispatch: # Permet aussi de le lancer manuellement avec un bouton
+
+jobs:
+  scrape-and-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Installation des dépendances
+        run: |
+          pip install -r requirements.txt
+          
+      - name: Lancement du script Fantôme
+        env:
+          GOOGLE_SHEET_CREDENTIALS: ${{ secrets.GOOGLE_SHEET_CREDENTIALS }}
+        run: python auto_scraper.py
